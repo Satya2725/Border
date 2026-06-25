@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ANTARDRISHTI — Weak Signal Intelligence Network</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+  <!-- Leaflet -->
+  <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top glass-nav" id="mainNav">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#hero">
+      <span class="brand-icon"><i class="fa-solid fa-satellite-dish neon-cyan"></i></span>
+      <span class="brand-name">ANTARDRISHTI</span>
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item"><a class="nav-link nav-pill" href="#hero"><i class="bi bi-house-door me-1"></i>Home</a></li>
+        <li class="nav-item"><a class="nav-link nav-pill" href="#dashboard"><i class="bi bi-speedometer2 me-1"></i>Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link nav-pill" href="#observations"><i class="bi bi-eye me-1"></i>Observations</a></li>
+        <li class="nav-item"><a class="nav-link nav-pill" href="#map"><i class="bi bi-map me-1"></i>Intelligence Map</a></li>
+        <li class="nav-item"><a class="nav-link nav-pill" href="#digital-twin"><i class="bi bi-diagram-3 me-1"></i>Digital Twin</a></li>
+        <li class="nav-item"><a class="nav-link nav-pill" href="#analytics"><i class="bi bi-bar-chart-line me-1"></i>Analytics</a></li>
+        <li class="nav-item"><a class="nav-link nav-pill" href="#alerts"><i class="bi bi-bell me-1"></i>Alerts</a></li>
+        <li class="nav-item"><a class="nav-link nav-pill" href="#future"><i class="bi bi-rocket me-1"></i>Expansion</a></li>
+      </ul>
+      <div class="ms-3 d-flex align-items-center gap-2">
+        <span class="status-dot-live"><span class="pulse-ring"></span></span>
+        <small class="text-success fw-bold">LIVE</small>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO SECTION
+============================================================ -->
+<section id="hero" class="hero-section position-relative overflow-hidden">
+  <canvas id="heroCanvas"></canvas>
+  <div id="particles-container"></div>
+  <div class="hero-content container text-center position-relative z-2">
+    <div class="hero-badge mb-4" data-aos="fade-down">
+      <span class="badge-inner"><i class="bi bi-shield-check me-2"></i>CLASSIFIED INTELLIGENCE PLATFORM</span>
+    </div>
+    <h1 class="hero-title" data-aos="zoom-in" data-aos-delay="200">
+      <span class="title-line-1">ANTARDRISHTI</span>
+      <span class="title-line-2 d-block">अंतर्दृष्टि</span>
+    </h1>
+    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
+      AI-Powered Weak Signal Intelligence Network
+    </p>
+    <p class="hero-desc mx-auto" data-aos="fade-up" data-aos-delay="600">
+      Transforming citizen observations into actionable intelligence through<br/>
+      anomaly detection, pattern fusion, and AI-assisted threat analysis.
+    </p>
+    <div class="hero-tagline" data-aos="fade-up" data-aos-delay="700">
+      "Turning Millions of Small Observations into Actionable National Intelligence"
+    </div>
+    <div class="hero-buttons d-flex justify-content-center gap-3 flex-wrap mt-4" data-aos="fade-up" data-aos-delay="800">
+      <a href="#dashboard" class="btn btn-primary-neon btn-lg">
+        <i class="bi bi-speedometer2 me-2"></i>Launch Dashboard
+      </a>
+      <a href="#observations" class="btn btn-outline-neon btn-lg">
+        <i class="bi bi-plus-circle me-2"></i>Submit Observation
+      </a>
+    </div>
+    <div class="hero-stats d-flex justify-content-center gap-4 mt-5 flex-wrap" data-aos="fade-up" data-aos-delay="1000">
+      <div class="stat-chip"><span class="stat-val" data-count="124839">0</span><span class="stat-label">Observations</span></div>
+      <div class="stat-chip"><span class="stat-val" data-count="3847">0</span><span class="stat-label">Active Signals</span></div>
+      <div class="stat-chip"><span class="stat-val" data-count="284">0</span><span class="stat-label">Patterns Detected</span></div>
+      <div class="stat-chip"><span class="stat-val" data-count="99">0</span><span class="stat-label">% Uptime</span></div>
+    </div>
+  </div>
+  <div class="scroll-indicator"><i class="bi bi-chevron-double-down"></i></div>
+</section>
+
+<!-- ============================================================
+     INTELLIGENCE DASHBOARD
+============================================================ -->
+<section id="dashboard" class="section-dark py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge"><i class="bi bi-cpu me-2"></i>INTELLIGENCE DASHBOARD</span>
+      <h2 class="section-title mt-2">Real-Time Operational Picture</h2>
+      <p class="section-sub">AI-fused intelligence from thousands of citizen observations</p>
+    </div>
+    <!-- KPI Cards -->
+    <div class="row g-4 mb-4">
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="kpi-card kpi-cyan">
+          <div class="kpi-icon"><i class="bi bi-eye-fill"></i></div>
+          <div class="kpi-val counter" data-target="124839">0</div>
+          <div class="kpi-label">Total Observations</div>
+          <div class="kpi-trend up"><i class="bi bi-arrow-up-short"></i>+12.4%</div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="150">
+        <div class="kpi-card kpi-yellow">
+          <div class="kpi-icon"><i class="bi bi-activity"></i></div>
+          <div class="kpi-val counter" data-target="3847">0</div>
+          <div class="kpi-label">Active Weak Signals</div>
+          <div class="kpi-trend up"><i class="bi bi-arrow-up-short"></i>+8.2%</div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="kpi-card kpi-orange">
+          <div class="kpi-icon"><i class="bi bi-diagram-2-fill"></i></div>
+          <div class="kpi-val counter" data-target="284">0</div>
+          <div class="kpi-label">Emerging Patterns</div>
+          <div class="kpi-trend up"><i class="bi bi-arrow-up-short"></i>+5.7%</div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="250">
+        <div class="kpi-card kpi-red">
+          <div class="kpi-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+          <div class="kpi-val counter" data-target="47">0</div>
+          <div class="kpi-label">High Risk Zones</div>
+          <div class="kpi-trend down"><i class="bi bi-arrow-down-short"></i>-3.1%</div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="kpi-card kpi-green">
+          <div class="kpi-icon"><i class="bi bi-robot"></i></div>
+          <div class="kpi-val"><span class="counter" data-target="87">0</span>%</div>
+          <div class="kpi-label">AI Confidence Index</div>
+          <div class="kpi-trend up"><i class="bi bi-arrow-up-short"></i>+2.3%</div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="350">
+        <div class="kpi-card kpi-purple">
+          <div class="kpi-icon"><i class="bi bi-clipboard2-check-fill"></i></div>
+          <div class="kpi-val counter" data-target="129">0</div>
+          <div class="kpi-label">Under Review</div>
+          <div class="kpi-trend down"><i class="bi bi-arrow-down-short"></i>-7.4%</div>
+        </div>
+      </div>
+    </div>
+    <!-- Activity Timeline + AI Workflow -->
+    <div class="row g-4">
+      <div class="col-lg-8" data-aos="fade-right">
+        <div class="glass-card p-4 h-100">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-broadcast-pin me-2 text-cyan"></i>Live Signal Feed</h5>
+          <div id="liveFeed" class="live-feed-container"></div>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-left">
+        <div class="glass-card p-4 h-100">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-gear-wide-connected me-2 text-cyan"></i>AI Workflow</h5>
+          <div class="ai-workflow" id="aiWorkflow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OBSERVATION PORTAL
+============================================================ -->
+<section id="observations" class="section-mid py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge"><i class="bi bi-send me-2"></i>OBSERVATION PORTAL</span>
+      <h2 class="section-title mt-2">Submit a Weak Signal</h2>
+      <p class="section-sub">Your observation could be the missing piece in a critical intelligence pattern</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <div class="glass-card p-4">
+          <form id="observationForm" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label-neon">Signal Category <span class="text-danger">*</span></label>
+                <select class="form-select form-select-dark" id="category" required>
+                  <option value="">-- Select Category --</option>
+                  <optgroup label="🌿 Environmental">
+                    <option value="tire_tracks">Tire Tracks</option>
+                    <option value="footprints">Footprints</option>
+                    <option value="broken_fence">Broken Fence</option>
+                    <option value="disturbed_soil">Disturbed Soil</option>
+                    <option value="temp_shelter">Temporary Shelter</option>
+                  </optgroup>
+                  <optgroup label="💡 Light Activity">
+                    <option value="strange_lights">Strange Lights</option>
+                    <option value="flashing_lights">Flashing Lights</option>
+                    <option value="torch_signals">Torch Signals</option>
+                    <option value="campfire">Campfire</option>
+                  </optgroup>
+                  <optgroup label="🔊 Sound Activity">
+                    <option value="drone_sound">Drone Sound</option>
+                    <option value="vehicle_sound">Vehicle Sound</option>
+                    <option value="unknown_sound">Unknown Sound</option>
+                    <option value="explosion_like">Explosion-Like Sound</option>
+                  </optgroup>
+                  <optgroup label="🐕 Animal Behaviour">
+                    <option value="dog_barking">Continuous Dog Barking</option>
+                    <option value="livestock_panic">Livestock Panic</option>
+                    <option value="bird_disturbance">Bird Disturbance</option>
+                    <option value="wildlife_activity">Wildlife Activity</option>
+                  </optgroup>
+                  <optgroup label="👃 Smell Activity">
+                    <option value="diesel_smell">Diesel Smell</option>
+                    <option value="smoke_smell">Smoke</option>
+                    <option value="chemical_odor">Chemical Odor</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-neon">Observation Date & Time <span class="text-danger">*</span></label>
+                <input type="datetime-local" class="form-control form-control-dark" id="obsDateTime" required/>
+              </div>
+              <div class="col-12">
+                <label class="form-label-neon">Description <span class="text-danger">*</span></label>
+                <textarea class="form-control form-control-dark" id="description" rows="3" placeholder="Describe what you observed in detail..." required></textarea>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-neon">GPS Latitude</label>
+                <input type="number" class="form-control form-control-dark" id="latitude" placeholder="e.g. 32.7266" step="any"/>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-neon">GPS Longitude</label>
+                <input type="number" class="form-control form-control-dark" id="longitude" placeholder="e.g. 74.8570" step="any"/>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-neon"><i class="bi bi-image me-1"></i>Image Upload</label>
+                <input type="file" class="form-control form-control-dark" id="imageUpload" accept="image/*"/>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-neon"><i class="bi bi-mic me-1"></i>Audio Upload</label>
+                <input type="file" class="form-control form-control-dark" id="audioUpload" accept="audio/*"/>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-neon"><i class="bi bi-camera-video me-1"></i>Video Upload</label>
+                <input type="file" class="form-control form-control-dark" id="videoUpload" accept="video/*"/>
+              </div>
+              <div class="col-12 mt-2">
+                <button type="submit" class="btn btn-primary-neon btn-lg w-100" id="submitObsBtn">
+                  <i class="bi bi-send-fill me-2"></i>Send Weak Signal
+                </button>
+              </div>
+            </div>
+          </form>
+          <div id="obsSuccess" class="success-banner mt-3 d-none">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            Observation Added to Intelligence Network — Signal ID: <span id="signalId"></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-left">
+        <div class="glass-card p-4 mb-4">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-geo-alt-fill me-2 text-cyan"></i>Location Picker</h5>
+          <div id="miniMap" style="height:200px;border-radius:8px;"></div>
+          <small class="text-muted mt-2 d-block">Click map to set coordinates</small>
+        </div>
+        <div class="glass-card p-4">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-info-circle me-2 text-cyan"></i>Signal Categories</h5>
+          <div class="category-legend" id="categoryLegend"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LIVE INTELLIGENCE MAP
+============================================================ -->
+<section id="map" class="section-dark py-5">
+  <div class="container-fluid px-4">
+    <div class="section-header text-center mb-4" data-aos="fade-up">
+      <span class="section-badge"><i class="bi bi-map me-2"></i>LIVE INTELLIGENCE MAP</span>
+      <h2 class="section-title mt-2">Geospatial Signal Fusion</h2>
+      <p class="section-sub">Real-time observation mapping with heatmaps, clusters and movement corridors</p>
+    </div>
+    <div class="row g-3">
+      <div class="col-lg-9" data-aos="fade-right">
+        <div class="glass-card p-2">
+          <div class="map-controls d-flex flex-wrap gap-2 p-2">
+            <button class="btn btn-sm map-btn active" onclick="toggleLayer('markers')"><i class="bi bi-geo-alt me-1"></i>Markers</button>
+            <button class="btn btn-sm map-btn" onclick="toggleLayer('heatmap')"><i class="bi bi-fire me-1"></i>Heatmap</button>
+            <button class="btn btn-sm map-btn" onclick="toggleLayer('clusters')"><i class="bi bi-collection me-1"></i>Clusters</button>
+            <button class="btn btn-sm map-btn" onclick="toggleLayer('corridors')"><i class="bi bi-arrows-move me-1"></i>Corridors</button>
+            <span class="ms-auto text-muted small align-self-center"><i class="bi bi-circle-fill text-success me-1"></i>Normal
+              <i class="bi bi-circle-fill text-warning ms-2 me-1"></i>Emerging
+              <i class="bi bi-circle-fill text-orange ms-2 me-1"></i>Review
+              <i class="bi bi-circle-fill text-danger ms-2 me-1"></i>High Priority
+            </span>
+          </div>
+          <div id="mainMap" style="height:520px;border-radius:8px;"></div>
+        </div>
+      </div>
+      <div class="col-lg-3" data-aos="fade-left">
+        <div class="glass-card p-3 mb-3">
+          <h6 class="card-title-neon"><i class="bi bi-list-check me-2"></i>Recent Signals</h6>
+          <div id="recentSignals" class="signal-list"></div>
+        </div>
+        <div class="glass-card p-3">
+          <h6 class="card-title-neon"><i class="bi bi-pie-chart me-2"></i>Signal Distribution</h6>
+          <canvas id="signalPieChart" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WEAK SIGNAL FUSION ENGINE
+============================================================ -->
+<section id="fusion" class="section-mid py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge"><i class="bi bi-diagram-3 me-2"></i>SIGNAL FUSION ENGINE</span>
+      <h2 class="section-title mt-2">AI Pattern Recognition</h2>
+      <p class="section-sub">Multiple weak signals fused into actionable intelligence patterns</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="glass-card p-4 h-100">
+          <h5 class="card-title-neon mb-4"><i class="bi bi-broadcast me-2 text-cyan"></i>Signal Fusion Flow</h5>
+          <div class="fusion-flow" id="fusionFlow"></div>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="glass-card p-4 h-100">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-shield-exclamation me-2 text-cyan"></i>Pattern Analysis</h5>
+          <div class="pattern-analysis" id="patternAnalysis"></div>
+          <div class="ai-explanation glass-inner mt-3 p-3">
+            <i class="bi bi-robot me-2 text-cyan"></i>
+            <span id="aiExplanation">Multiple weak signals across neighboring regions indicate activity deviating from historical baseline. Correlation coefficient: 0.84. Human verification recommended.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BORDER DIGITAL TWIN
+============================================================ -->
+<section id="digital-twin" class="section-dark py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge innovation-badge"><i class="bi bi-stars me-2"></i>MAIN INNOVATION</span>
+      <h2 class="section-title mt-2">Border Digital Twin</h2>
+      <p class="section-sub">AI-generated mirror of border activity — detecting deviations from historical baseline</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="metric-card">
+          <div class="metric-label">Normal Activity Score</div>
+          <div class="metric-gauge" id="gaugeNormal"></div>
+          <div class="metric-value text-success" id="normalScore">94.2</div>
+          <div class="metric-sub">Baseline</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="metric-card">
+          <div class="metric-label">Current Activity Score</div>
+          <div class="metric-gauge" id="gaugeCurrent"></div>
+          <div class="metric-value text-warning" id="currentScore">71.8</div>
+          <div class="metric-sub">Live Reading</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="metric-card">
+          <div class="metric-label">Deviation Index</div>
+          <div class="metric-gauge" id="gaugeDeviation"></div>
+          <div class="metric-value text-orange" id="deviationScore">22.4</div>
+          <div class="metric-sub">Δ from Baseline</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+        <div class="metric-card">
+          <div class="metric-label">Anomaly Percentage</div>
+          <div class="metric-gauge" id="gaugeAnomaly"></div>
+          <div class="metric-value text-danger" id="anomalyScore">8.7</div>
+          <div class="metric-sub">% of total signals</div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-4 mt-2">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="glass-card p-4">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-radar me-2 text-cyan"></i>Activity Radar</h5>
+          <canvas id="radarChart" height="280"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="glass-card p-4">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-graph-up-arrow me-2 text-cyan"></i>24h Trend Analysis</h5>
+          <canvas id="trendChart" height="280"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     AI ANOMALY CENTER
+============================================================ -->
+<section id="anomaly" class="section-mid py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge"><i class="bi bi-cpu me-2"></i>AI ANOMALY CENTER</span>
+      <h2 class="section-title mt-2">Detected Anomalies</h2>
+      <p class="section-sub">AI-flagged patterns awaiting human verification — no automated decisions made</p>
+    </div>
+    <div class="row g-4" id="anomalyCards"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MOVEMENT CORRIDOR PREDICTION
+============================================================ -->
+<section id="movement" class="section-dark py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge"><i class="bi bi-signpost-2 me-2"></i>MOVEMENT CORRIDOR PREDICTION</span>
+      <h2 class="section-title mt-2">Predictive Path Analysis</h2>
+      <p class="section-sub">AI-predicted movement corridors based on signal fusion and historical data</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-7" data-aos="fade-right">
+        <div class="glass-card p-4">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-arrows-move me-2 text-cyan"></i>Corridor Simulation</h5>
+          <div id="corridorMap" style="height:400px;border-radius:8px;"></div>
+        </div>
+      </div>
+      <div class="col-lg-5" data-aos="fade-left">
+        <div class="glass-card p-4 h-100">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-list-stars me-2 text-cyan"></i>Predicted Routes</h5>
+          <div id="corridorList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ALERT MANAGEMENT
+============================================================ -->
+<section id="alerts" class="section-mid py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge"><i class="bi bi-bell me-2"></i>ALERT MANAGEMENT</span>
+      <h2 class="section-title mt-2">Active Intelligence Alerts</h2>
+      <p class="section-sub">Tiered alert system with human-in-the-loop verification workflow</p>
+    </div>
+    <div class="row g-3 mb-4" data-aos="fade-up">
+      <div class="col-auto"><button class="btn btn-filter active" data-filter="all">All Alerts</button></div>
+      <div class="col-auto"><button class="btn btn-filter" data-filter="red"><i class="bi bi-circle-fill text-danger me-1"></i>Critical</button></div>
+      <div class="col-auto"><button class="btn btn-filter" data-filter="orange"><i class="bi bi-circle-fill text-orange me-1"></i>High</button></div>
+      <div class="col-auto"><button class="btn btn-filter" data-filter="yellow"><i class="bi bi-circle-fill text-warning me-1"></i>Medium</button></div>
+      <div class="col-auto"><button class="btn btn-filter" data-filter="green"><i class="bi bi-circle-fill text-success me-1"></i>Low</button></div>
+    </div>
+    <div class="row g-3" id="alertCards"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ANALYTICS
+============================================================ -->
+<section id="analytics" class="section-dark py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge"><i class="bi bi-bar-chart-line me-2"></i>ANALYTICS</span>
+      <h2 class="section-title mt-2">Intelligence Analytics</h2>
+      <p class="section-sub">Deep statistical analysis of observation patterns and signal evolution</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-8" data-aos="fade-right">
+        <div class="glass-card p-4">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-graph-up me-2 text-cyan"></i>Observation Trends (30 Days)</h5>
+          <canvas id="trendLineChart" height="200"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-left">
+        <div class="glass-card p-4">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-bar-chart me-2 text-cyan"></i>Signal Distribution</h5>
+          <canvas id="barChart" height="200"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="glass-card p-4">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-shield-fill-exclamation me-2 text-cyan"></i>Risk Evolution</h5>
+          <canvas id="riskChart" height="200"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="glass-card p-4">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-geo me-2 text-cyan"></i>Regional Activity</h5>
+          <canvas id="regionalChart" height="200"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="glass-card p-4">
+          <h5 class="card-title-neon mb-3"><i class="bi bi-fire me-2 text-cyan"></i>Hotspot Growth</h5>
+          <canvas id="hotspotChart" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FUTURE EXPANSION
+============================================================ -->
+<section id="future" class="section-mid py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge"><i class="bi bi-rocket me-2"></i>FUTURE EXPANSION</span>
+      <h2 class="section-title mt-2">Expanding the Intelligence Network</h2>
+      <p class="section-sub">ANTARDRISHTI's technology applied to national challenges beyond border security</p>
+    </div>
+    <div class="row g-4" id="futureCards"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FINAL BANNER
+============================================================ -->
+<section id="final-banner" class="final-banner position-relative overflow-hidden py-5">
+  <canvas id="bannerCanvas"></canvas>
+  <div class="container position-relative z-2 text-center py-4">
+    <h2 class="banner-title" data-aos="zoom-in">
+      Every Major Event Begins as a<br/><span class="neon-cyan">Weak Signal</span>
+    </h2>
+    <p class="banner-sub mt-3" data-aos="fade-up" data-aos-delay="300">
+      ANTARDRISHTI ensures those signals are <span class="neon-green">never ignored</span>
+    </p>
+    <div class="mt-4 d-flex justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="500">
+      <a href="#observations" class="btn btn-primary-neon btn-lg"><i class="bi bi-send me-2"></i>Submit Observation</a>
+      <a href="#dashboard" class="btn btn-outline-neon btn-lg"><i class="bi bi-speedometer2 me-2"></i>View Dashboard</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer py-4">
+  <div class="container text-center">
+    <div class="footer-logo mb-2"><i class="fa-solid fa-satellite-dish neon-cyan me-2"></i><span class="brand-name">ANTARDRISHTI</span></div>
+    <p class="text-muted small mb-1">Turning Millions of Small Observations into Actionable National Intelligence</p>
+    <p class="text-muted small">
+      <i class="bi bi-shield-check me-1 text-success"></i>AI assists, humans decide. No automated threat declarations.
+      &nbsp;|&nbsp; Built for Hackathon 2025
+    </p>
+  </div>
+</footer>
+
+<!-- Toast Notification -->
+<div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<!-- Leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- App JS -->
+<script src="js/app.js"></script>
+</body>
+</html>

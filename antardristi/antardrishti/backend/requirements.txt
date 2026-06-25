@@ -1,0 +1,40 @@
+# ANTARDRISHTI — Python Backend Requirements
+# Install with: pip install -r requirements.txt
+
+# ── Web Framework ─────────────────────────────────────────────────────────────
+fastapi==0.110.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9
+
+# ── Database ──────────────────────────────────────────────────────────────────
+sqlalchemy==2.0.29
+asyncpg==0.29.0
+alembic==1.13.1
+psycopg2-binary==2.9.9
+geoalchemy2==0.14.3
+
+# ── AI / ML ───────────────────────────────────────────────────────────────────
+scikit-learn==1.4.1.post1
+numpy==1.26.4
+pandas==2.2.1
+tensorflow==2.16.1
+opencv-python-headless==4.9.0.80
+# ultralytics==8.1.0   # YOLO — uncomment for full AI
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+pydantic==2.6.4
+python-dotenv==1.0.1
+httpx==0.27.0
+aiofiles==23.2.1
+Pillow==10.3.0
+shapely==2.0.4
+
+# ── Streamlit Dashboard ───────────────────────────────────────────────────────
+streamlit==1.33.0
+plotly==5.21.0
+folium==0.16.0
+streamlit-folium==0.20.0
+
+# ── Security ──────────────────────────────────────────────────────────────────
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4

@@ -1,0 +1,78 @@
+version: '3.9'
+
+# ANTARDRISHTI — Docker Compose
+# Services: PostgreSQL/PostGIS, FastAPI, Streamlit
+
+services:
+
+  # ── PostgreSQL + PostGIS ──────────────────────────────────────────────────
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: antardrishti_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       antardrishti_db
+      POSTGRES_USER:     antardrishti
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-SecurePass2025}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U antardrishti"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── FastAPI Backend ──────────────────────────────────────────────────────
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: antardrishti_api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+asyncpg://antardrishti:${DB_PASSWORD:-SecurePass2025}@db:5432/antardrishti_db
+      ENVIRONMENT:  production
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
+
+  # ── Streamlit Dashboard ──────────────────────────────────────────────────
+  dashboard:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: antardrishti_dashboard
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+asyncpg://antardrishti:${DB_PASSWORD:-SecurePass2025}@db:5432/antardrishti_db
+      API_URL: http://api:8000
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+    command: streamlit run streamlit_app.py --server.port 8501 --server.address 0.0.0.0
+
+  # ── Nginx Reverse Proxy ──────────────────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: antardrishti_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../frontend:/usr/share/nginx/html:ro
+    depends_on:
+      - api
+      - dashboard
+
+volumes:
+  pgdata:
+    driver: local
